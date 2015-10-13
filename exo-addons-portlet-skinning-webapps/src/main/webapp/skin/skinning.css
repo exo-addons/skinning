@@ -1,1 +1,8 @@
 @import "../../../../../../skin/skinning.css";
+
+
+.redim_img {
+    height : 30px;
+/*    width : 80px;*/
+    overflow : hidden;
+}

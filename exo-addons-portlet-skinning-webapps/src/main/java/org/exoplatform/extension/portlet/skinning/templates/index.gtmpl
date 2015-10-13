@@ -37,6 +37,7 @@
 </div>
 </div>-->
 
+Top header Icons:<br/>
 <input type="radio" name="icons" value="Default" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Default.png" alt="Default"><br/>
 <input type="radio" name="icons" value="Extra" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Extra.png" alt="Extra"><br/>
 <input type="radio" name="icons" value="Primary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Primary.png" alt="Primary"><br/>
@@ -48,6 +49,12 @@ Top header backgroud:
 Top header text color:
 <input id="top_head_cl" />
 
+Top header text hover color:
+<input id="top_head_ho_cl" />
+
+Top header hover backgroud:
+<input id="top_head_ho_bg" />
+
 Page backgroud:
 <input id="page_bg" />
 
@@ -55,8 +62,17 @@ Titles backgroud:
 <input id="title_bg" />
 Titles color:
 <input id="title_cl"/>
+
+
+Left navigation Icons:<br/>
+<input type="radio" name="leftIcons" value="Default" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFDefault.png" alt="Default"></input><br/>
+<input type="radio" name="leftIcons" value="Extra" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFExtra.png" alt="Extra"></input><br/>
+<input type="radio" name="leftIcons" value="Primary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFPrimary.png" alt="Primary"></input><br/>
+<input type="radio" name="leftIcons" value="Secondary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFSecondary.png" alt="Secondary"></input><br/>
 Left navigation background:
 <input id="l_nav_bg"/>
+
+
 
 <div class="uiAction boxContent">
 		<button value="Save" type="button" class="btn btn-primate" id="save" >Save</button>
