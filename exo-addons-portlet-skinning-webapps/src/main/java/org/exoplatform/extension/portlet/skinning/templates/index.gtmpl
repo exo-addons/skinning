@@ -1,81 +1,78 @@
 <%
-      /**
-      * Copyright ( C ) 2012 eXo Platform SAS.
-      *
-      * This is free software; you can redistribute it and/or modify it
-      * under the terms of the GNU Lesser General Public License as
-      * published by the Free Software Foundation; either version 2.1 of
-      * the License, or (at your option) any later version.
-      *
-      * This software is distributed in the hope that it will be useful,
-      * but WITHOUT ANY WARRANTY; without even the implied warranty of
-      * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-      * Lesser General Public License for more details.
-      *
-      * You should have received a copy of the GNU Lesser General Public
-      * License along with this software; if not, write to the Free
-      * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
-      * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
-      */
+        /**
+        * Copyright ( C ) 2012 eXo Platform SAS.
+        *
+        * This is free software; you can redistribute it and/or modify it
+        * under the terms of the GNU Lesser General Public License as
+        * published by the Free Software Foundation; either version 2.1 of
+        * the License, or (at your option) any later version.
+        *
+        * This software is distributed in the hope that it will be useful,
+        * but WITHOUT ANY WARRANTY; without even the implied warranty of
+        * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        * Lesser General Public License for more details.
+        *
+        * You should have received a copy of the GNU Lesser General Public
+        * License along with this software; if not, write to the Free
+        * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+        * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
+        */
 
-      %>
-
-
+        %>
 <div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
 <div class="LoadingContainer">
     <div class="LoadingText">Loading</div>
     <span class="LoadingProgressBar"></span>
 </div>
 </div>
-
-
 <div id="SkinningPortlet">
 <!--<div class="form-horizontal">
-<div class="control-group">
-   <label for="nav_head" class="control-label">Titles backgroud:</label>
-   <div class="controls"><input type="text" id="nav_head" name="nav_head"></div>
+   <div class="control-group">
+      <label for="nav_head" class="control-label">Titles backgroud:</label>
+      <div class="controls"><input type="text" id="nav_head" name="nav_head"></div>
+   </div>
+   </div>-->
+<div class="fields_holder">
+    <h5 class="h_title">Top header</h5>
+        <h6 class="f_title">Top header Icons:<br/></h6>
+            <input type="radio" name="icons" value="Default" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Default.png" alt="Default"><br/>
+            <input type="radio" name="icons" value="Extra" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Extra.png" alt="Extra"><br/>
+            <input type="radio" name="icons" value="Primary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Primary.png" alt="Primary"><br/>
+            <input type="radio" name="icons" value="Secondary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Secondary.png" alt="Secondary"><br/>
+        <h6 class="f_title">Top header backgroud:</h6>
+            <input id="top_head_bg" />
+        <h6 class="f_title">Top header text color:</h6>
+            <input id="top_head_cl" />
+        <h6 class="f_title">Top header text hover color:</h6>
+            <input id="top_head_ho_cl" />
+        <h6 class="f_title">Top header hover backgroud:</h6>
+            <input id="top_head_ho_bg" />
 </div>
-</div>-->
-
-Top header Icons:<br/>
-<input type="radio" name="icons" value="Default" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Default.png" alt="Default"><br/>
-<input type="radio" name="icons" value="Extra" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Extra.png" alt="Extra"><br/>
-<input type="radio" name="icons" value="Primary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Primary.png" alt="Primary"><br/>
-<input type="radio" name="icons" value="Secondary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Secondary.png" alt="Secondary"><br/>
-
-Top header backgroud:
-<input id="top_head_bg" />
-
-Top header text color:
-<input id="top_head_cl" />
-
-Top header text hover color:
-<input id="top_head_ho_cl" />
-
-Top header hover backgroud:
-<input id="top_head_ho_bg" />
-
-Page backgroud:
-<input id="page_bg" />
-
-Titles backgroud:
-<input id="title_bg" />
-Titles color:
-<input id="title_cl"/>
-
-
-Left navigation Icons:<br/>
-<input type="radio" name="leftIcons" value="Default" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFDefault.png" alt="Default"></input><br/>
-<input type="radio" name="leftIcons" value="Extra" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFExtra.png" alt="Extra"></input><br/>
-<input type="radio" name="leftIcons" value="Primary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFPrimary.png" alt="Primary"></input><br/>
-<input type="radio" name="leftIcons" value="Secondary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFSecondary.png" alt="Secondary"></input><br/>
-Left navigation background:
-<input id="l_nav_bg"/>
-
-
-
-<div class="uiAction boxContent">
-		<button value="Save" type="button" class="btn btn-primate" id="save" >Save</button>
-		<button value="Cancel" type="button" class="btn" id="cancel">Cancel</button>
-	</div>
+<div class="fields_holder">
+    <h5 class="h_title">Page backgroud:</h5>
+        <input id="page_bg" />
+</div>
+<div class="fields_holder">
+    <h5 class="h_title">Titles</h5>
+        <h6 class="f_title">Titles backgroud:</h6>
+            <input id="title_bg" />
+        <h6 class="f_title">Titles color:</h6>
+            <input id="title_cl"/>
+</div>
+<div class="fields_holder">
+    <h5 class="h_title">Left navigation</h5>
+        <h6 class="f_title">Left navigation Icons:<br/></h6>
+            <input type="radio" name="leftIcons" value="Default" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFDefault.png" alt="Default"></input><br/>
+            <input type="radio" name="leftIcons" value="Extra" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFExtra.png" alt="Extra"></input><br/>
+            <input type="radio" name="leftIcons" value="Primary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFPrimary.png" alt="Primary"></input><br/>
+            <input type="radio" name="leftIcons" value="Secondary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFSecondary.png" alt="Secondary"></input><br/>
+        <h6 class="f_title">Left navigation background:</h6>
+            <input id="l_nav_bg"/>
+</div>
+<div class="fields_holder">
+    <div class="uiAction boxContent">
+        <button value="Save" type="button" class="btn btn-primate" id="save" >Save</button>
+        <button value="Cancel" type="button" class="btn" id="cancel">Cancel</button>
+    </div>
+</div>
 </div>
