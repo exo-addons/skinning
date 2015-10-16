@@ -33,46 +33,46 @@
    </div>
    </div>-->
 <div class="fields_holder">
-    <h5 class="h_title">Top header</h5>
-        <h6 class="f_title">Top header Icons:<br/></h6>
+    <h5 class="h_title">&{skinning.top.header}</h5>
+        <h6 class="f_title">&{skinning.top.header.icons}<br/></h6>
             <input type="radio" name="icons" value="Default" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Default.png" alt="Default"><br/>
             <input type="radio" name="icons" value="Extra" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Extra.png" alt="Extra"><br/>
             <input type="radio" name="icons" value="Primary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Primary.png" alt="Primary"><br/>
             <input type="radio" name="icons" value="Secondary" /> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24Secondary.png" alt="Secondary"><br/>
-        <h6 class="f_title">Top header backgroud:</h6>
+        <h6 class="f_title">&{skinning.top.header.backgroud}</h6>
             <input id="top_head_bg" />
-        <h6 class="f_title">Top header text color:</h6>
+        <h6 class="f_title">&{skinning.top.header.color}</h6>
             <input id="top_head_cl" />
-        <h6 class="f_title">Top header text hover color:</h6>
+        <h6 class="f_title">&{skinning.top.header.ho.color}</h6>
             <input id="top_head_ho_cl" />
-        <h6 class="f_title">Top header hover backgroud:</h6>
+        <h6 class="f_title">&{skinning.top.header.ho.backgroud}</h6>
             <input id="top_head_ho_bg" />
 </div>
 <div class="fields_holder">
-    <h5 class="h_title">Page backgroud:</h5>
+    <h5 class="h_title">&{skinning.page.backgroud}</h5>
         <input id="page_bg" />
 </div>
 <div class="fields_holder">
-    <h5 class="h_title">Titles</h5>
-        <h6 class="f_title">Titles backgroud:</h6>
+    <h5 class="h_title">&{skinning.titles}</h5>
+        <h6 class="f_title">&{skinning.titles.backgroud}</h6>
             <input id="title_bg" />
-        <h6 class="f_title">Titles color:</h6>
+        <h6 class="f_title">&{skinning.titles.color}</h6>
             <input id="title_cl"/>
 </div>
 <div class="fields_holder">
-    <h5 class="h_title">Left navigation</h5>
-        <h6 class="f_title">Left navigation Icons:<br/></h6>
+    <h5 class="h_title">&{skinning.navigation}</h5>
+        <h6 class="f_title">&{skinning.navigation.icons}<br/></h6>
             <input type="radio" name="leftIcons" value="Default" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFDefault.png" alt="Default"></input><br/>
             <input type="radio" name="leftIcons" value="Extra" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFExtra.png" alt="Extra"></input><br/>
             <input type="radio" name="leftIcons" value="Primary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFPrimary.png" alt="Primary"></input><br/>
             <input type="radio" name="leftIcons" value="Secondary" class="redim_img"> <img src="/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLFSecondary.png" alt="Secondary"></input><br/>
-        <h6 class="f_title">Left navigation background:</h6>
+        <h6 class="f_title">&{skinning.navigation.background}</h6>
             <input id="l_nav_bg"/>
 </div>
 <div class="fields_holder">
     <div class="uiAction boxContent">
-        <button value="Save" type="button" class="btn btn-primate" id="save" >Save</button>
-        <button value="Cancel" type="button" class="btn" id="cancel">Cancel</button>
+        <button value="Save" type="button" class="btn btn-primate" id="save" >&{skinning.save}</button>
+        <button value="Cancel" type="button" class="btn" id="cancel">&{skinning.cancel}</button>
     </div>
 </div>
 </div>
