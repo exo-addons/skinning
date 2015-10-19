@@ -20,10 +20,6 @@ $(document).ready(function () {
         var leftIcons='.LeftNavigationTDContainer [class^="uiIcon"] {background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important}';
         var style = [topHeadBgLight, topHeadBgDark, topTitleColorLight, topTitleColorDark, pageBg, title, LeftNavigationTDContainer, icons, leftIcons, topHeadBgHoDark, topHeadBgHoLight];
 
-
-
-
-
         $.ajax
         ({
             beforeSend: function () {;
@@ -214,7 +210,8 @@ $(document).ready(function () {
     $("#top_head_bg").on("change.color", function(event, color){
         $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; background-image: none ! important;');
         $('.UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; background-image: none ! important;');
-
+        $('.UIToolbarContainerDark .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
+        $('.UIToolbarContainerLight .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
     })
 
 
