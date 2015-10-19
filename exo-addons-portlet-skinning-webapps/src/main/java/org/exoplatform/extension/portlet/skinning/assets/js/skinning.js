@@ -170,7 +170,7 @@ $(document).ready(function () {
                 }
             }
             var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
-            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length-1);
+            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
             $("#top_head_ho_cl").colorpicker({
                 color: getHex(ho_header_cl)
             });
@@ -307,7 +307,7 @@ function rgbToHex(rgb) {
 
 function getHex(c) {
     if (c.indexOf("rgb")!=-1){
-        return rgbToHex(c.replace("!important",""))
+        return rgbToHex(c.replace("!important","").replace(/\s/g, ''))
     }
-    return c.replace("!important","");
+    return c.replace("!important","").replace(/\s/g, '');
 }
