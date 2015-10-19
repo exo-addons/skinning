@@ -1,30 +1,30 @@
-
-
 $(document).ready(function () {
     $('#save').on('click', function () {
 
-        var topHeadBgLight=".UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer { background-color: "+$("#top_head_bg").val()+" ! important; background-image: none ! important;}";
-        var topHeadBgDark=".UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer { background-color: "+$("#top_head_bg").val()+" ! important; background-image: none ! important;}";
+        var topHeadBgLight=".UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer { background-color: "+$("#top_head_bg").val()+" ! important; background-image: none ! important}";
+        var topHeadBgDark=".UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer { background-color: "+$("#top_head_bg").val()+" ! important; background-image: none ! important}";
 
-        var topHeadBgHoLight=".UIToolbarContainerLight .uiDropdownWithIcon > a:hover{background:  "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important; }";
-        var topHeadBgHoDark=".UIToolbarContainerDark .uiDropdownWithIcon > a:hover { background-color: "+$("#top_head_ho_bg").val()+" ! important; color: "+$("#top_head_ho_cl").val()+" !important; ! important;}";
+        var topHeadBgHoLight=".UIToolbarContainerLight .uiDropdownWithIcon > a:hover{background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important}";
+        var topHeadBgHoDark=".UIToolbarContainerDark .uiDropdownWithIcon > a:hover{background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color: "+$("#top_head_ho_cl").val()+" !important}";
 
+        var  topTitleColorLight=".UIToolbarContainerLight .uiDropdownWithIcon > a { color: "+$("#top_head_cl").val()+" ! important}";
+        var  topTitleColorDark=".UIToolbarContainerDark .uiDropdownWithIcon > a { color: "+$("#top_head_cl").val()+" ! important}";
 
-        var  topTitleColorLight=".UIToolbarContainerLight .uiDropdownWithIcon > a { color: "+$("#top_head_cl").val()+" ! important;}";
-        var  topTitleColorDark=".UIToolbarContainerDark .uiDropdownWithIcon > a { color: "+$("#top_head_cl").val()+" ! important;}";
+        var pageBg=".RightBodyTDContainer {background: "+$("#page_bg").val()+" none repeat scroll left top ! important}";
 
-        var pageBg=".RightBodyTDContainer {background: "+$("#page_bg").val()+" none repeat scroll left top ! important;}";
-
-        var  title =".title  { background: "+$("#title_bg").val()+" none repeat scroll 0 0 !important; color: "+$("#title_cl").val()+" !important;}";
-        var LeftNavigationTDContainer=".LeftNavigationTDContainer {   background: "+$("#l_nav_bg").val()+" none repeat scroll 0 0 !important;}";
-        var icons='[class^="uiIconPLF24x24"] {background-image: url("/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24'+$('input[name=icons]:checked').val()+'.png") !important;}';
-        var leftIcons='.LeftNavigationTDContainer [class^="uiIcon"] {background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important;}';
+        var  title =".title  { background: "+$("#title_bg").val()+" none repeat scroll 0 0 !important; color: "+$("#title_cl").val()+" !important}";
+        var LeftNavigationTDContainer=".LeftNavigationTDContainer {   background: "+$("#l_nav_bg").val()+" none repeat scroll 0 0 !important}";
+        var icons='[class^="uiIconPLF24x24"] {background-image: url("/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24'+$('input[name=icons]:checked').val()+'.png") !important}';
+        var leftIcons='.LeftNavigationTDContainer [class^="uiIcon"] {background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important}';
         var style = [topHeadBgLight, topHeadBgDark, topTitleColorLight, topTitleColorDark, pageBg, title, LeftNavigationTDContainer, icons, leftIcons, topHeadBgHoDark, topHeadBgHoLight];
+
+
+
 
 
         $.ajax
         ({
-            beforeSend: function () {
+            beforeSend: function () {;
                 $("#save").attr('disabled', 'disabled');
                 $("#AjaxLoadingMask").show();
             },
@@ -68,26 +68,137 @@ $(document).ready(function () {
         location.reload(true);
     });
 
+    var ho_header="";
+
+    $.ajax
+    ({
+        cache: true,
+        type: "GET",
+        async: false,
+        contentType: "application/json",
+        url: "/rest/private/skinning/getstyles",
+    })
+        .fail
+    (
+        function () {
+            var f = false;
+            var selector = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
+            var rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+            var css = document.styleSheets;
+            for (var k = 0; k < css.length; k++) {
+                var rules = document.styleSheets[k].cssRules;
+                for (var i = 0; i < rules.length; i++) {
+                    if (rgs.test(rules[i].selectorText)) {
+                        if (!f) {
+                            ho_header = rules[i].style.cssText;
+                            f = true;
+                        } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                            ho_header = rules[i].style.cssText;
+                        }
+                    }
+                }
+            }
+
+            if (!f) {
+                selector = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
+                rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+                css = document.styleSheets;
+                for (var k = 0; k < css.length; k++) {
+                    var rules = document.styleSheets[k].cssRules;
+                    for (var i = 0; i < rules.length; i++) {
+                        if (rgs.test(rules[i].selectorText)) {
+                            if (!f) {
+                                ho_header = rules[i].style.cssText;
+                                f = true;
+                            } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                                ho_header = rules[i].style.cssText;
+                            }
+                        }
+                    }
+                }
+            }
+            var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
+            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
+            $("#top_head_ho_cl").colorpicker({
+                color: getHex(ho_header_cl)
+            });
+            $("#top_head_ho_bg").colorpicker({
+                color: getHex(ho_header_bg)
+            });
+        }
+    )
+        .done
+    (
+        function (data) {
+            ho_header=data.topHeadHo;
+            if(ho_header==""||typeof(ho_header) == "undefined") {
+                var f = false;
+                var selector = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
+                var rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+                var css = document.styleSheets;
+                for (var k = 0; k < css.length; k++) {
+                    var rules = document.styleSheets[k].cssRules;
+                    for (var i = 0; i < rules.length; i++) {
+                        if (rgs.test(rules[i].selectorText)) {
+                            if (!f) {
+                                ho_header = rules[i].style.cssText;
+                                f = true;
+                            } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                                ho_header = rules[i].style.cssText;
+                            }
+                        }
+                    }
+                }
+
+                if (!f) {
+                    selector = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
+                    rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+                    css = document.styleSheets;
+                    for (var k = 0; k < css.length; k++) {
+                        var rules = document.styleSheets[k].cssRules;
+                        for (var i = 0; i < rules.length; i++) {
+                            if (rgs.test(rules[i].selectorText)) {
+                                if (!f) {
+                                    ho_header = rules[i].style.cssText;
+                                    f = true;
+                                } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                                    ho_header = rules[i].style.cssText;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
+            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length-1);
+            $("#top_head_ho_cl").colorpicker({
+                color: getHex(ho_header_cl)
+            });
+            $("#top_head_ho_bg").colorpicker({
+                color: getHex(ho_header_bg)
+            });
+        }
+    );
+
 
     $("#top_head_bg").colorpicker({
-        color: $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').css('background-color')
+        color: getHex($('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').css('background-color'))
     });
     $("#top_head_cl").colorpicker({
-        color: $('.UIToolbarContainerDark .uiDropdownWithIcon > a').css('color')
+        color: getHex($('.UIToolbarContainerDark .uiDropdownWithIcon > a').css('color'))
     });
-    $("#top_head_ho_cl").colorpicker();
-    $("#top_head_ho_bg").colorpicker();
+
     $("#page_bg").colorpicker({
-       color: $('.RightBodyTDContainer').css('background-color')
+       color: getHex($('.RightBodyTDContainer').css('background-color'))
     });
     $("#title_bg").colorpicker({
-       color: $('.title').css('background-color')
+       color: getHex($('.title').css('background-color'))
     });
     $("#title_cl").colorpicker({
-        color: $('.title').css('color')
+        color: getHex($('.title').css('color'))
     });
     $("#l_nav_bg").colorpicker({
-        color: $('.LeftNavigationTDContainer').css('color')
+        color: getHex($('.LeftNavigationTDContainer').css('background-color'))
     });
 
 
@@ -99,8 +210,8 @@ $(document).ready(function () {
     $("[name=leftIcons]").val([leftIconSet]);
 
     $("#top_head_bg").on("change.color", function(event, color){
-        $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; cbackground-image: none ! important;');
-        $('.UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; cbackground-image: none ! important;');
+        $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; background-image: none ! important;');
+        $('.UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; background-image: none ! important;');
 
     })
 
@@ -112,16 +223,36 @@ $(document).ready(function () {
     })
 
     $("#top_head_ho_bg").on("change.color", function(event, color){
-        $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_ho_bg").val()+' ! important; cbackground-image: none ! important;');
-        $('.UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_ho_bg").val()+' ! important; cbackground-image: none ! important;');
-
+        var selector1 = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
+        var rgs1 = new RegExp('\\s*' + selector1 + "\\s*", "g");
+        var selector2 = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
+        var rgs2 = new RegExp('\\s*' + selector2 + "\\s*", "g");
+        var css = document.styleSheets;
+        for (var k = 0; k < css.length; k++) {
+            var rules = document.styleSheets[k].cssRules;
+            for (var i = 0; i < rules.length; i++) {
+                if (rgs1.test(rules[i].selectorText)||rgs2.test(rules[i].selectorText)) {
+                    rules[i].style.cssText="background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important;";
+                }
+            }
+        }
     })
 
 
     $("#top_head_ho_cl").on("change.color", function(event, color){
-        $('.UIToolbarContainerDark .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
-        $('.UIToolbarContainerLight .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
-
+        var selector1 = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
+        var rgs1 = new RegExp('\\s*' + selector1 + "\\s*", "g");
+        var selector2 = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
+        var rgs2 = new RegExp('\\s*' + selector2 + "\\s*", "g");
+        var css = document.styleSheets;
+        for (var k = 0; k < css.length; k++) {
+            var rules = document.styleSheets[k].cssRules;
+            for (var i = 0; i < rules.length; i++) {
+                if (rgs1.test(rules[i].selectorText)||rgs2.test(rules[i].selectorText)) {
+                    rules[i].style.cssText="background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important;";
+                }
+            }
+        }
     })
 
 
@@ -155,5 +286,28 @@ $(document).ready(function () {
 
 });
 
+function componentFromStr(numStr, percent) {
+    var num = Math.max(0, parseInt(numStr, 10));
+    return percent ?
+        Math.floor(255 * Math.min(100, num) / 100) : Math.min(255, num);
+}
 
+function rgbToHex(rgb) {
+    var rgbRegex = /^rgb\(\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*,\s*(-?\d+)(%?)\s*\)$/;
+    var result, r, g, b, hex = "";
+    if ( (result = rgbRegex.exec(rgb)) ) {
+        r = componentFromStr(result[1], result[2]);
+        g = componentFromStr(result[3], result[4]);
+        b = componentFromStr(result[5], result[6]);
 
+        hex = "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+    return hex;
+}
+
+function getHex(c) {
+    if (c.indexOf("rgb")!=-1){
+        return rgbToHex(c.replace("!important",""))
+    }
+    return c.replace("!important","");
+}

@@ -13,6 +13,7 @@ import org.exoplatform.social.core.manager.IdentityManager;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.lang.String;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -64,6 +65,75 @@ public class SkinningRestService implements ResourceContainer {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An internal error has occured").build();
         }
     }
+
+
+    @GET
+    @Path("getstyles")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response getStyles(@Context HttpServletRequest request,@Context UriInfo uriInfo) throws Exception {
+
+        Identity sourceIdentity = Util.getAuthenticatedUserIdentity(portalContainerName);
+        MediaType mediaType = RestChecker.checkSupportedFormat("json", SUPPORTED_FORMATS);
+        try {
+
+            if(sourceIdentity == null) {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }
+            LOG.info(FILE_NAME);
+
+            List<String> lines= readSmallTextFile(FILE_NAME, ENCODING);
+            String rule="";
+            String skin="";
+
+            JSONObject jsonGlobal = new JSONObject();
+
+            for(String line : lines){
+                rule= line.split("\\{")[0];
+                skin= line.split("\\{")[1];
+                skin=skin.substring(0, skin.indexOf("}"));
+
+                if(rule.contains("ToolbarContainer")){
+                    jsonGlobal.put("topHeadBg",skin);
+                }
+
+                if(rule.contains("uiDropdownWithIcon")&&!rule.contains("hover")){
+                    jsonGlobal.put("topHeadCl",skin);
+                }
+
+                if(rule.contains("uiDropdownWithIcon")&&rule.contains("hover")){
+                    jsonGlobal.put("topHeadHo",skin);
+                }
+
+                if(rule.contains("RightBodyTDContainer")){
+                    jsonGlobal.put("pageBg",skin);
+                }
+
+                if(rule.contains("title")){
+                    jsonGlobal.put("title",skin);
+                }
+
+                if(rule.contains("LeftNavigationTDContainer")&&!rule.contains("uiIcon")){
+                    jsonGlobal.put("leftNavBg",skin);
+                }
+
+                if(rule.contains("LeftNavigationTDContainer")&&rule.contains("uiIcon")){
+                    jsonGlobal.put("leftNavIcons",skin);
+                }
+
+                if(rule.contains("uiIconPLF24x24")){
+                    jsonGlobal.put("topHeadIcons",skin);
+                }
+
+            }
+
+            return Response.ok(jsonGlobal.toString(), mediaType).build();
+        } catch (Exception e) {
+            LOG.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An internal error has occured").build();
+        }
+    }
+
+
     void writeSmallTextFile(List<String> aLines, String aFileName, Charset encoding) throws IOException {
         java.nio.file.Path path = Paths.get(aFileName);
         try {
