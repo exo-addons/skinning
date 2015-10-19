@@ -1,4 +1,6 @@
+
 $(document).ready(function () {
+    var changed=false;
     $('#save').on('click', function () {
 
         var topHeadBgLight=".UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer { background-color: "+$("#top_head_bg").val()+" ! important; background-image: none ! important}";
@@ -222,37 +224,13 @@ $(document).ready(function () {
 
     })
 
-    $("#top_head_ho_bg").on("change.color", function(event, color){
-        var selector1 = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
-        var rgs1 = new RegExp('\\s*' + selector1 + "\\s*", "g");
-        var selector2 = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
-        var rgs2 = new RegExp('\\s*' + selector2 + "\\s*", "g");
-        var css = document.styleSheets;
-        for (var k = 0; k < css.length; k++) {
-            var rules = document.styleSheets[k].cssRules;
-            for (var i = 0; i < rules.length; i++) {
-                if (rgs1.test(rules[i].selectorText)||rgs2.test(rules[i].selectorText)) {
-                    rules[i].style.cssText="background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important;";
-                }
-            }
-        }
+  $("#top_head_ho_bg").on("change.color", function(event, color){
+        changed=true;
     })
 
 
     $("#top_head_ho_cl").on("change.color", function(event, color){
-        var selector1 = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
-        var rgs1 = new RegExp('\\s*' + selector1 + "\\s*", "g");
-        var selector2 = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
-        var rgs2 = new RegExp('\\s*' + selector2 + "\\s*", "g");
-        var css = document.styleSheets;
-        for (var k = 0; k < css.length; k++) {
-            var rules = document.styleSheets[k].cssRules;
-            for (var i = 0; i < rules.length; i++) {
-                if (rgs1.test(rules[i].selectorText)||rgs2.test(rules[i].selectorText)) {
-                    rules[i].style.cssText="background: "+$("#top_head_ho_bg").val()+" none repeat scroll 0 0 !important; color:  "+$("#top_head_ho_cl").val()+" !important;";
-                }
-            }
-        }
+        changed=true;
     })
 
 
@@ -284,6 +262,22 @@ $(document).ready(function () {
         $(".LeftNavigationTDContainer [class^='uiIcon']").attr('style', 'background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important');
     })
 
+    $('.UIToolbarContainerDark .uiDropdownWithIcon > a').mouseenter(function() {
+        if(changed){
+            $(this).attr('style', 'background: '+$("#top_head_ho_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_ho_cl").val()+' !important');
+        }
+    }).mouseleave(function() {
+        if(changed){
+        $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
+        }});
+
+    $('.UIToolbarContainerLight .uiDropdownWithIcon > a').mouseenter(function() {
+        if(changed){
+        $(this).attr('style', 'background: '+$("#top_head_ho_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_ho_cl").val()+' !important');
+        }}).mouseleave(function() {
+            if(changed){
+        $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
+            }});
 });
 
 function componentFromStr(numStr, percent) {
