@@ -16,9 +16,9 @@ $(document).ready(function () {
 
         var  title =".title  { background: "+$("#title_bg").val()+" none repeat scroll 0 0 !important; color: "+$("#title_cl").val()+" !important}";
         var LeftNavigationTDContainer=".LeftNavigationTDContainer {   background: "+$("#l_nav_bg").val()+" none repeat scroll 0 0 !important}";
-        var icons='[class^="uiIconPLF24x24"] {background-image: url("/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24'+$('input[name=icons]:checked').val()+'.png") !important}';
-        var leftIcons='.LeftNavigationTDContainer [class^="uiIcon"] {background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important}';
-        var style = [topHeadBgLight, topHeadBgDark, topTitleColorLight, topTitleColorDark, pageBg, title, LeftNavigationTDContainer, icons, leftIcons, topHeadBgHoDark, topHeadBgHoLight];
+        var icons=".UIToolbarContainer [class^='uiIconPLF24x24'] { color: "+$("#top_head_icon_cl").val()+" ! important}";
+        var leftIcons=".uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i { color: "+$("#l_nav_icon_cl").val()+" ! important}";
+        var style = topHeadBgLight + topHeadBgDark + topTitleColorLight + topTitleColorDark + pageBg + title + LeftNavigationTDContainer + icons + leftIcons + topHeadBgHoDark + topHeadBgHoLight;
 
         $.ajax
         ({
@@ -29,7 +29,7 @@ $(document).ready(function () {
             cache: true,
             type: "POST",
             async: true,
-            data: JSON.stringify(style),
+            data: style,
             contentType: "application/json",
             dataType: "json",
             url: "/rest/private/skinning/write",
@@ -56,7 +56,7 @@ $(document).ready(function () {
         (
             function (data) {
                 $("#AjaxLoadingMask").hide();
-                location.reload(true);
+                window.location.reload(true)
             }
         );
     });
@@ -67,6 +67,8 @@ $(document).ready(function () {
     });
 
     var ho_header="";
+
+/*
 
     $.ajax
     ({
@@ -179,8 +181,13 @@ $(document).ready(function () {
     );
 
 
+*/
+
     $("#top_head_bg").colorpicker({
         color: getHex($('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').css('background-color'))
+    });
+    $("#top_head_icon_cl").colorpicker({
+        color: getHex($('.UIToolbarContainer [class^="uiIconPLF24x24"]').css('color'))
     });
     $("#top_head_cl").colorpicker({
         color: getHex($('.UIToolbarContainerDark .uiDropdownWithIcon > a').css('color'))
@@ -198,14 +205,10 @@ $(document).ready(function () {
     $("#l_nav_bg").colorpicker({
         color: getHex($('.LeftNavigationTDContainer').css('background-color'))
     });
+    $("#l_nav_icon_cl").colorpicker({
+        color: getHex($('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i').css('color'))
+    });
 
-
-    var backIcon=$("i[class^='uiIconPLF24x24']").css("background-image");
-    var iconSet=backIcon.substring(backIcon.indexOf("uiIconsPLF24x24")+15, backIcon.indexOf(".png"));
-    var leftBackIcon=$(".LeftNavigationTDContainer [class^='uiIcon']").css("background-image");
-    var leftIconSet=leftBackIcon.substring(leftBackIcon.indexOf("uiIcons")+7, leftBackIcon.indexOf(".png"));
-    $("[name=icons]").val([iconSet]);
-    $("[name=leftIcons]").val([leftIconSet]);
 
     $("#top_head_bg").on("change.color", function(event, color){
         $('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').attr('style', 'background-color: '+$("#top_head_bg").val()+' ! important; background-image: none ! important;');
@@ -214,6 +217,10 @@ $(document).ready(function () {
         $('.UIToolbarContainerLight .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
     })
 
+
+    $("#top_head_icon_cl").on("change.color", function(event, color){
+        $('.UIToolbarContainer [class^="uiIconPLF24x24"]').attr('style', 'color: '+$("#top_head_icon_cl").val()+' ! important;');
+    })
 
     $("#top_head_cl").on("change.color", function(event, color){
         $('.UIToolbarContainerDark .uiDropdownWithIcon > a').attr('style', 'color: '+$("#top_head_cl").val()+' ! important;');
@@ -251,12 +258,8 @@ $(document).ready(function () {
         $('.LeftNavigationTDContainer').attr('style', 'background: '+$("#l_nav_bg").val()+' none repeat scroll 0 0 !important');
     })
 
-    $('input[name=icons]').on("change", function(){
-        $("i[class^='uiIconPLF24x24']").attr('style', 'background-image: url("/eXoSkin/skin/images/themes/default/platform/skin/Icons/uiIconsPLF24x24'+$('input[name=icons]:checked').val()+'.png") !important');
-    })
-
-    $('input[name=leftIcons]').on("change", function(){
-        $(".LeftNavigationTDContainer [class^='uiIcon']").attr('style', 'background-image: url("/eXoSkin/skin/images/themes/default/Icons/uiIcons'+$('input[name=leftIcons]:checked').val()+'.png") !important');
+    $("#l_nav_icon_cl").on("change.color", function(event, color){
+        $('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i').attr('style', 'color: '+$("#l_nav_icon_cl").val()+' !important');
     })
 
     $('.UIToolbarContainerDark .uiDropdownWithIcon > a').mouseenter(function() {

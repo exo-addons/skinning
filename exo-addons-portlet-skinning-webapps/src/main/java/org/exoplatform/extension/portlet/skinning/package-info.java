@@ -29,9 +29,10 @@
 })
 @Stylesheets ({
        @Stylesheet(id = "jquerythemecss", value = "skin/jquery.ui.theme.css"),
-        @Stylesheet(id = "colorpickercss", value = "skin/evol.colorpicker.min.css")
+        @Stylesheet(id = "colorpickercss", value = "skin/evol.colorpicker.min.css"),
+        @Stylesheet(id = "skinningcss", value = "skin/skinning.css")
 })
-//@Less("skin/skinning.less")
+
 @Assets("*")
 
 package org.exoplatform.extension.portlet.skinning;
