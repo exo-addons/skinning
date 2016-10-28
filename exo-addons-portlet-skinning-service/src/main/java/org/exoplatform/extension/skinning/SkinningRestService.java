@@ -68,6 +68,32 @@ public class SkinningRestService implements ResourceContainer {
     }
 
 
+    @POST
+    @Path("reset")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response reset(@Context HttpServletRequest request,@Context UriInfo uriInfo) throws Exception {
+
+        Identity sourceIdentity = Util.getAuthenticatedUserIdentity(portalContainerName);
+        MediaType mediaType = RestChecker.checkSupportedFormat("json", SUPPORTED_FORMATS);
+        try {
+
+            RepositoryService repositoryService = (RepositoryService) PortalContainer.getInstance().getComponentInstanceOfType(RepositoryService.class);
+            ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+            Session session = manageableRepository.getSystemSession("collaboration");
+            Node cssNode = (Node) session.getItem("/sites/shared/css/skineditor");
+            Node  jcrContentNode= cssNode.getNode("jcr:content") ;
+            jcrContentNode.setProperty("jcr:data", new ByteArrayInputStream(new byte[0]));
+            session.save();
+            JSONObject jsonGlobal = new JSONObject();
+            jsonGlobal.put("message","reset done");
+            return Response.ok(jsonGlobal.toString(), mediaType).build();
+        } catch (Exception e) {
+            LOG.error(e);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("An internal error has occured").build();
+        }
+    }
+
+
     @GET
     @Path("getstyles")
     @Consumes({MediaType.APPLICATION_JSON})

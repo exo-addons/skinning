@@ -66,6 +66,7 @@
 <div class="fields_holder">
     <div class="uiAction boxContent">
         <button value="Save" type="button" class="btn btn-primate" id="save" >&{skinning.save}</button>
+        <button value="Reset" type="button" class="btn" id="reset">&{skinning.reset}</button>
         <button value="Cancel" type="button" class="btn" id="cancel">&{skinning.cancel}</button>
     </div>
 </div>

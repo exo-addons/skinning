@@ -61,9 +61,50 @@ $(document).ready(function () {
         );
     });
 
+    $('#reset').on('click', function () {
+        $.ajax
+        ({
+            beforeSend: function () {;
+                $("#save").attr('disabled', 'disabled');
+                $("#AjaxLoadingMask").show();
+            },
+            cache: true,
+            type: "POST",
+            async: true,
+            contentType: "application/json",
+            dataType: "json",
+            url: "/rest/private/skinning/reset",
+            statusCode: {
+                400: function (xhr) {
+                    $("#actionfail").html('<i class="uiIconError"></i>' + xhr.responseText);
+                    $("#actionfail").show().delay(10000).fadeOut();
+                    $("#AjaxLoadingMask").hide();
+                },
+                500: function (xhr) {
+                    $("#actionfail").html('<i class="uiIconError"></i>' + xhr.responseText);
+                    $("#actionfail").show().delay(10000).fadeOut();
+                    $("#AjaxLoadingMask").hide();
+                }
+            }
+        })
+            .fail
+            (
+                function () {
+                    $("#AjaxLoadingMask").hide();
+                }
+            )
+            .done
+            (
+                function (data) {
+                    $("#AjaxLoadingMask").hide();
+                    window.location.reload(true)
+                }
+            );
+    });
+
 
     $('#cancel').on('click', function () {
-        location.reload(true);
+        window.location.reload(true);
     });
 
     var ho_header="";
