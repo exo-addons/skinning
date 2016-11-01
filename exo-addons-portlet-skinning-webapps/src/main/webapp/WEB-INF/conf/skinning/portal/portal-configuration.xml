@@ -51,6 +51,22 @@
           <name>extended.setup.navigation.file</name>
           <value>war:/conf/skinning/setup-navigation.xml</value>
         </value-param>
+        <value-param>
+          <name>isChild</name>
+          <value>true</value>
+        </value-param>
+        <object-param>
+          <name>target.node.config</name>
+          <description>The target node</description>
+          <object type="org.exoplatform.portal.config.model.PageNode">
+            <field name="name">
+              <string>portal</string>
+            </field>
+            <field name="pageReference">
+              <string>group::platform/administrators::pageManagement</string>
+            </field>
+          </object>
+        </object-param>
       </init-params>
     </component-plugin>
   </external-component-plugins>
