@@ -18,7 +18,8 @@ $(document).ready(function () {
         var LeftNavigationTDContainer=".LeftNavigationTDContainer {   background: "+$("#l_nav_bg").val()+" none repeat scroll 0 0 !important}";
         var icons=".UIToolbarContainer [class^='uiIconPLF24x24'] { color: "+$("#top_head_icon_cl").val()+" ! important}";
         var leftIcons=".uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i { color: "+$("#l_nav_icon_cl").val()+" ! important}";
-        var style = topHeadBgLight + topHeadBgDark + topTitleColorLight + topTitleColorDark + pageBg + title + LeftNavigationTDContainer + icons + leftIcons + topHeadBgHoDark + topHeadBgHoLight;
+        var leftText=".uiCompanyNavigationPortlet .uiCompanyNavigations > li > a   { color: "+$("#l_nav_tx_cl").val()+" ! important}";
+        var style = topHeadBgLight + topHeadBgDark + topTitleColorLight + topTitleColorDark + pageBg + title + LeftNavigationTDContainer + icons + leftIcons + leftText + topHeadBgHoDark + topHeadBgHoLight;
 
         $.ajax
         ({
@@ -47,18 +48,18 @@ $(document).ready(function () {
             }
         })
             .fail
-        (
-            function () {
-                $("#AjaxLoadingMask").hide();
-            }
-        )
+            (
+                function () {
+                    $("#AjaxLoadingMask").hide();
+                }
+            )
             .done
-        (
-            function (data) {
-                $("#AjaxLoadingMask").hide();
-                window.location.reload(true)
-            }
-        );
+            (
+                function (data) {
+                    $("#AjaxLoadingMask").hide();
+                    window.location.reload(true)
+                }
+            );
     });
 
     $('#reset').on('click', function () {
@@ -109,7 +110,7 @@ $(document).ready(function () {
 
     var ho_header="";
 
-/*
+
 
     $.ajax
     ({
@@ -120,59 +121,8 @@ $(document).ready(function () {
         url: "/rest/private/skinning/getstyles",
     })
         .fail
-    (
-        function () {
-            var f = false;
-            var selector = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
-            var rgs = new RegExp('\\s*' + selector + "\\s*", "g");
-            var css = document.styleSheets;
-            for (var k = 0; k < css.length; k++) {
-                var rules = document.styleSheets[k].cssRules;
-                for (var i = 0; i < rules.length; i++) {
-                    if (rgs.test(rules[i].selectorText)) {
-                        if (!f) {
-                            ho_header = rules[i].style.cssText;
-                            f = true;
-                        } else if (rules[i].style.cssText.indexOf("important") != "-1") {
-                            ho_header = rules[i].style.cssText;
-                        }
-                    }
-                }
-            }
-
-            if (!f) {
-                selector = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
-                rgs = new RegExp('\\s*' + selector + "\\s*", "g");
-                css = document.styleSheets;
-                for (var k = 0; k < css.length; k++) {
-                    var rules = document.styleSheets[k].cssRules;
-                    for (var i = 0; i < rules.length; i++) {
-                        if (rgs.test(rules[i].selectorText)) {
-                            if (!f) {
-                                ho_header = rules[i].style.cssText;
-                                f = true;
-                            } else if (rules[i].style.cssText.indexOf("important") != "-1") {
-                                ho_header = rules[i].style.cssText;
-                            }
-                        }
-                    }
-                }
-            }
-            var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
-            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
-            $("#top_head_ho_cl").colorpicker({
-                color: getHex(ho_header_cl)
-            });
-            $("#top_head_ho_bg").colorpicker({
-                color: getHex(ho_header_bg)
-            });
-        }
-    )
-        .done
-    (
-        function (data) {
-            ho_header=data.topHeadHo;
-            if(ho_header==""||typeof(ho_header) == "undefined") {
+        (
+            function () {
                 var f = false;
                 var selector = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
                 var rgs = new RegExp('\\s*' + selector + "\\s*", "g");
@@ -209,36 +159,91 @@ $(document).ready(function () {
                         }
                     }
                 }
+                var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
+                var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
+                $("#top_head_ho_cl").colorpicker({
+                    color: getHex(ho_header_cl)
+                });
+                $("#top_head_ho_bg").colorpicker({
+                    color: getHex(ho_header_bg)
+                });
             }
-            var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
-            var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
-            $("#top_head_ho_cl").colorpicker({
-                color: getHex(ho_header_cl)
-            });
-            $("#top_head_ho_bg").colorpicker({
-                color: getHex(ho_header_bg)
-            });
-        }
-    );
+        )
+        .done
+        (
+            function (data) {
+                ho_header=data.topHeadHo;
+                if(ho_header==""||typeof(ho_header) == "undefined") {
+                    var f = false;
+                    var selector = ".UIToolbarContainerDark .uiDropdownWithIcon > a:hover";
+                    var rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+                    var css = document.styleSheets;
+                    for (var k = 0; k < css.length; k++) {
+                        var rules = document.styleSheets[k].cssRules;
+                        for (var i = 0; i < rules.length; i++) {
+                            if (rgs.test(rules[i].selectorText)) {
+                                if (!f) {
+                                    ho_header = rules[i].style.cssText;
+                                    f = true;
+                                } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                                    ho_header = rules[i].style.cssText;
+                                }
+                            }
+                        }
+                    }
 
+                    if (!f) {
+                        selector = ".UIToolbarContainerLight .uiDropdownWithIcon > a:hover";
+                        rgs = new RegExp('\\s*' + selector + "\\s*", "g");
+                        css = document.styleSheets;
+                        for (var k = 0; k < css.length; k++) {
+                            var rules = document.styleSheets[k].cssRules;
+                            for (var i = 0; i < rules.length; i++) {
+                                if (rgs.test(rules[i].selectorText)) {
+                                    if (!f) {
+                                        ho_header = rules[i].style.cssText;
+                                        f = true;
+                                    } else if (rules[i].style.cssText.indexOf("important") != "-1") {
+                                        ho_header = rules[i].style.cssText;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                var ho_header_bg=ho_header.substring(ho_header.indexOf("background:")+"background:".length,ho_header.indexOf(" none"));
+                var ho_header_cl=ho_header.substring(ho_header.indexOf("color:")+("color:").length,ho_header.length);
+                $("#top_head_ho_cl").colorpicker({
+                    color: getHex(ho_header_cl)
+                });
+                $("#top_head_ho_bg").colorpicker({
+                    color: getHex(ho_header_bg)
+                });
+            }
+        );
 
-*/
+    var headbg=$('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').css('background-color');
+    if (typeof headbg == 'undefined') headbg=$('.UIToolbarContainerLight .NormalContainerBlock .ToolbarContainer').css('background-color');
+
+    var headcl=$('.UIToolbarContainerDark .uiDropdownWithIcon > a').css('color');
+    if (typeof headcl == 'undefined') headcl=$('.UIToolbarContainerLight .uiDropdownWithIcon > a').css('color');
+
 
     $("#top_head_bg").colorpicker({
-        color: getHex($('.UIToolbarContainerDark .NormalContainerBlock .ToolbarContainer').css('background-color'))
+        color: getHex(headbg)
     });
     $("#top_head_icon_cl").colorpicker({
         color: getHex($('.UIToolbarContainer [class^="uiIconPLF24x24"]').css('color'))
     });
     $("#top_head_cl").colorpicker({
-        color: getHex($('.UIToolbarContainerDark .uiDropdownWithIcon > a').css('color'))
+        color: getHex(headcl)
     });
 
     $("#page_bg").colorpicker({
-       color: getHex($('.RightBodyTDContainer').css('background-color'))
+        color: getHex($('.RightBodyTDContainer').css('background-color'))
     });
     $("#title_bg").colorpicker({
-       color: getHex($('.title').css('background-color'))
+        color: getHex($('.title').css('background-color'))
     });
     $("#title_cl").colorpicker({
         color: getHex($('.title').css('color'))
@@ -248,6 +253,10 @@ $(document).ready(function () {
     });
     $("#l_nav_icon_cl").colorpicker({
         color: getHex($('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i').css('color'))
+    });
+
+    $("#l_nav_tx_cl").colorpicker({
+        color: getHex($('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a').css('color'))
     });
 
 
@@ -269,7 +278,7 @@ $(document).ready(function () {
 
     })
 
-  $("#top_head_ho_bg").on("change.color", function(event, color){
+    $("#top_head_ho_bg").on("change.color", function(event, color){
         changed=true;
     })
 
@@ -303,22 +312,26 @@ $(document).ready(function () {
         $('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a > i').attr('style', 'color: '+$("#l_nav_icon_cl").val()+' !important');
     })
 
+    $("#l_nav_tx_cl").on("change.color", function(event, color){
+        $('.uiCompanyNavigationPortlet .uiCompanyNavigations > li > a').attr('style', 'color: '+$("#l_nav_tx_cl").val()+' !important');
+    })
+
     $('.UIToolbarContainerDark .uiDropdownWithIcon > a').mouseenter(function() {
         if(changed){
             $(this).attr('style', 'background: '+$("#top_head_ho_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_ho_cl").val()+' !important');
         }
     }).mouseleave(function() {
         if(changed){
-        $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
+            $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
         }});
 
     $('.UIToolbarContainerLight .uiDropdownWithIcon > a').mouseenter(function() {
         if(changed){
-        $(this).attr('style', 'background: '+$("#top_head_ho_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_ho_cl").val()+' !important');
+            $(this).attr('style', 'background: '+$("#top_head_ho_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_ho_cl").val()+' !important');
         }}).mouseleave(function() {
-            if(changed){
-        $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
-            }});
+        if(changed){
+            $(this).attr('style', 'background: '+$("#top_head_bg").val()+' none repeat scroll 0 0 !important; color:  '+$("#top_head_cl").val()+' !important');
+        }});
 });
 
 function componentFromStr(numStr, percent) {

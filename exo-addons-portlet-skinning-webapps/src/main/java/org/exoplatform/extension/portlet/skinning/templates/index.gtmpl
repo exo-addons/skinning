@@ -62,6 +62,8 @@
             <input id="l_nav_icon_cl"/>
         <h6 class="f_title">&{skinning.navigation.background}</h6>
             <input id="l_nav_bg"/>
+        <h6 class="f_title">&{skinning.navigation.text.color}</h6>
+            <input id="l_nav_tx_cl"/>
 </div>
 <div class="fields_holder">
     <div class="uiAction boxContent">
