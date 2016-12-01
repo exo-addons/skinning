@@ -1,0 +1,22 @@
+.redim_img {
+    height : 30px;
+/*    width : 80px;*/
+    overflow : hidden;
+
+}
+
+.fields_holder {
+border: 1px solid #ccc;
+margin: 5px;
+padding: 10px;
+}
+
+.h_title {
+    border-bottom: 1px solid #ccc;
+    color: #2f5e92;
+
+}
+
+.f_title {
+    margin: 5px;
+}
