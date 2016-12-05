@@ -9,7 +9,7 @@
   </parent>
   <groupId>org.exoplatform.addons.skinning</groupId>
   <artifactId>skinning</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0.x-SNAPSHOT</version>
   <packaging>pom</packaging>
   <name>Skinning Portlet eXo Platform 4</name>
   <description>Skinning Portlet eXo Platform 4</description>
