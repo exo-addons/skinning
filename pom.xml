@@ -28,13 +28,24 @@
     <module>skinning-webapps</module>
     <module>skinning-pkg</module>
   </modules>
+
+  <scm>
+    <connection>scm:git:git://github.com/exo-addons/skinning.git</connection>
+    <developerConnection>scm:git:git@github.com:exo-addons/skinning.git</developerConnection>
+    <tag>HEAD</tag>
+    <url>https://github.com/exo-addons/skinning</url>
+  </scm>
+  <properties>
+    <org.exoplatform.platform.version>4.4.0-RC03</org.exoplatform.platform.version>
+  </properties>
+
   <dependencyManagement>
     <dependencies>
       <!-- Import versions from platform project -->
       <dependency>
         <groupId>org.exoplatform.platform</groupId>
         <artifactId>platform</artifactId>
-        <version>4.4.x-SNAPSHOT</version>
+        <version>${org.exoplatform.platform.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
